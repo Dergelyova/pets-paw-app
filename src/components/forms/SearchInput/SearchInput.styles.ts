@@ -3,16 +3,16 @@ import { Paper, FormControl, styled, OutlinedInput } from "@mui/material";
 export const SearchInputContainer = styled(OutlinedInput)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  width: 395,
-  padding: 10,
-  borderRadius: 20,
-  margin: 10,
+  width: "100%",
+  height: "60px",
+  padding: "10px",
+  borderRadius: "20px",
   outline: "none",
   backgroundColor: theme.palette.common.white,
   border: `2px solid ${theme.palette.common.white}`,
   "& .MuiOutlinedInput-input": {
-    paddingBlock: 5,
-    paddingInline: 10,
+    paddingBlock: "5px",
+    paddingInline: "10px",
   },
   "& fieldset": {
     border: "none",

@@ -30,17 +30,17 @@ export const SearchInput = () => {
     //   <SearchIconButton />
     // </SearchInputContainer>
 
-    <FormControl>
+    <FormControl fullWidth>
       <SearchInputContainer
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        sx={{ ml: "20px", flex: 1 }}
         placeholder="Search for breeds by name"
         endAdornment={
           <InputAdornment position="end">
             <SearchIconButton />
           </InputAdornment>
         }
+        fullWidth={true}
       />
     </FormControl>
   );
