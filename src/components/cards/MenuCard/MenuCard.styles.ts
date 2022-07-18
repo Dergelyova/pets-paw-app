@@ -1,9 +1,33 @@
-import { styled } from "@mui/material";
-import { Box, Paper } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { Paper, Button } from "@mui/material";
 
-export const MenuCardContainer = styled(Box)(({ theme }) => ({
+type ExtraProps = {
+  component: React.ElementType;
+  to: string;
+};
+
+export const MenuCardContainer = styled(Paper)<ExtraProps>(({ theme }) => ({
+  backgroundColor: "transparent",
   display: "inline-block",
   textAlign: "center",
+  textDecoration: "none",
+  "&:hover": {
+    ".MuiPaper-root": {
+      border: "4px solid #FFFFFF",
+    },
+    ".MuiButton-root": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
+  "&.active": {
+    ".MuiPaper-root": {
+      border: `4px solid ${theme.palette.secondary.main}`,
+    },
+    ".MuiButton-root": {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.common.white,
+    },
+  },
 }));
 
 export const MenuVoteCardImage = styled(Paper)(({ theme }) => ({
@@ -17,9 +41,6 @@ export const MenuVoteCardImage = styled(Paper)(({ theme }) => ({
     border: "4px solid #FFFFFF",
     cursor: "pointer",
   },
-  "&:active": {
-    border: `4px solid ${theme.palette.secondary.main}`,
-  },
 }));
 
 export const MenuBreedsCardImage = styled(MenuVoteCardImage)(({ theme }) => ({
@@ -28,4 +49,11 @@ export const MenuBreedsCardImage = styled(MenuVoteCardImage)(({ theme }) => ({
 
 export const MenuGalleryCardImage = styled(MenuVoteCardImage)(({ theme }) => ({
   backgroundColor: "#FFD280",
+}));
+
+export const MenuButton = styled(Button)(({ theme }) => ({
+  width: "138px",
+  paddingBlock: "10px",
+  borderRadius: "10px",
+  backgroundColor: theme.palette.background.paper,
 }));
