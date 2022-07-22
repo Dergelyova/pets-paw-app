@@ -6,6 +6,7 @@ export const PageSectionContainer = styled(Paper)({
   height: "100%",
   borderRadius: 20,
   padding: 20,
+  gap: 10,
 });
 
 export const StartPageSectionContainer = styled(PageSectionContainer)(

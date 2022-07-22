@@ -2,8 +2,17 @@ import React from "react";
 import { StyledGalleryCard } from "./GalleryCard.styles";
 
 type GalleryCardProps = {
-  imgUrl: string;
+  src: string;
+  alt: string;
+  srcSet: string;
+  isLiked: boolean;
 };
-export const GalleryCard = ({ imgUrl }: GalleryCardProps) => {
-  return <StyledGalleryCard src={imgUrl} />;
+
+export const GalleryCard = ({
+  src,
+  alt,
+  isLiked,
+  srcSet,
+}: GalleryCardProps) => {
+  return <StyledGalleryCard src={src} srcSet={srcSet} alt={alt} />;
 };

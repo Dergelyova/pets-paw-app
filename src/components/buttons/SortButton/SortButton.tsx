@@ -5,12 +5,13 @@ import { GreyIconButton } from "./SortButton.styles";
 
 type SortButtonProps = {
   sortOrder: "asc" | "desc";
+  handleClick: () => void;
 };
 
-export const SortButton = ({ sortOrder }: SortButtonProps) => {
+export const SortButton = ({ sortOrder, handleClick }: SortButtonProps) => {
   return (
-    <GreyIconButton>
-      {sortOrder === "asc" ? <SortIcon /> : <SortRevertIcon />}
+    <GreyIconButton onClick={handleClick}>
+      {sortOrder === "desc" ? <SortIcon /> : <SortRevertIcon />}
     </GreyIconButton>
   );
 };

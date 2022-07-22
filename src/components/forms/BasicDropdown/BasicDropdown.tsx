@@ -1,29 +1,44 @@
-import {
-  FormControl,
-  MenuItem,
-  Box,
-  SelectChangeEvent,
-  Typography,
-  InputLabel,
-} from "@mui/material";
-import React, { useState } from "react";
+import { FormControl, Box, SelectChangeEvent, Typography } from "@mui/material";
+
 import { StyledSelect, StyledMenuItem } from "./BasicDropdown.styles";
 import { ReactComponent as ArrowDown } from "../../../assets/svg/dropdown-12.svg";
-import { text } from "stream/consumers";
+import { IBreed } from "../../../services/types";
 
-type BasicDropdownProps = {
+type BasicDropdownProps<T> = {
   label?: string;
+  options: string[] | IBreed[];
+  selected?: string | number;
+  handleChange: (val: T) => void;
 };
 
-export const BasicDropdown = ({ label }: BasicDropdownProps) => {
-  const [selectedBreed, setSelectedBreed] = useState("ten");
-
-  const hanleChange = (event: SelectChangeEvent<string | unknown>) => {
-    setSelectedBreed(event.target.value as string);
+export const BasicDropdown = <T,>({
+  label,
+  selected,
+  options,
+  handleChange,
+}: BasicDropdownProps<T>) => {
+  const hanleDropdownChange = (event: SelectChangeEvent<T | unknown>) => {
+    handleChange(event.target.value as T);
   };
 
+  const dropdownOptions = options.map((option) => {
+    if (typeof option === "string") {
+      return (
+        <StyledMenuItem key={option} value={option}>
+          {option.toLowerCase()}
+        </StyledMenuItem>
+      );
+    } else {
+      return (
+        <StyledMenuItem key={option.id} value={option.id}>
+          {option.name.toLowerCase()}
+        </StyledMenuItem>
+      );
+    }
+  });
+
   return (
-    <Box sx={{ maxWidth: 200 }}>
+    <Box sx={{ width: "100%" }}>
       <FormControl fullWidth>
         {label && (
           <Typography
@@ -34,17 +49,13 @@ export const BasicDropdown = ({ label }: BasicDropdownProps) => {
           </Typography>
         )}
         <StyledSelect
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedBreed}
-          onChange={hanleChange}
+          value={selected}
+          onChange={hanleDropdownChange}
           IconComponent={ArrowDown}
           label={label || ""}
-          labeled={label ? true : false}
+          labeled={label ? 1 : 0}
         >
-          <StyledMenuItem value={"ten"}>Ten</StyledMenuItem>
-          <StyledMenuItem value={"twenty"}>Twenty</StyledMenuItem>
-          <StyledMenuItem value={"thirty"}>Thirty</StyledMenuItem>
+          {dropdownOptions}
         </StyledSelect>
       </FormControl>
     </Box>

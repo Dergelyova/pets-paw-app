@@ -3,6 +3,7 @@ import { RouteObject } from "react-router-dom";
 import { AppLayout } from "../layouts/AppLayout/AppLayout";
 import { PageSectionLayout } from "../layouts/PageSection/PageSectionLayout";
 import BreedsView from "../views/BreedsView/BreedsView";
+import { SelectedBreedView } from "../views/BreedsView/SelectedBreedView/SelectedBreedView";
 import DislikesView from "../views/DislikesView/DislikesView";
 import FavouritesView from "../views/FavouritesView/FavouritesView";
 import GalleryView from "../views/GalleryView/GalleryView";
@@ -23,6 +24,10 @@ export const ROUTER_CONFIG: RouteObject[] = [
           {
             path: "breeds",
             element: <BreedsView />,
+          },
+          {
+            path: "breeds/:breedId",
+            element: <SelectedBreedView />,
           },
           {
             path: "gallery",

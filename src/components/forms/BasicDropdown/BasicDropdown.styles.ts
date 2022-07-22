@@ -1,12 +1,14 @@
 import { styled, Select, MenuItem } from "@mui/material";
 
 type StylesSelectProps = {
-  labeled?: boolean;
+  labeled?: 1 | 0;
 };
 
 export const StyledSelect = styled(Select)<StylesSelectProps>(
   ({ theme, labeled }) => ({
     ...theme.typography.body2,
+    textTransform: "capitalize",
+    minWidth: "100px",
     color: labeled ? theme.palette.text.primary : theme.palette.text.secondary,
     borderRadius: "10px",
     border: "2px solid transparent",
@@ -17,6 +19,7 @@ export const StyledSelect = styled(Select)<StylesSelectProps>(
     }`,
     boxSizing: "border-box",
     height: "40px",
+
     "& .MuiSelect-select": { padding: "8px 10px" },
     "& fieldset": {
       border: "none",
@@ -37,6 +40,7 @@ export const StyledSelect = styled(Select)<StylesSelectProps>(
 export const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   ...theme.typography.body2,
   color: theme.palette.text.secondary,
+  textTransform: "capitalize",
   "&$selected": {
     backgroundColor: theme.palette.primary.main,
   },

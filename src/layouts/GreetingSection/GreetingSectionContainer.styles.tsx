@@ -17,6 +17,7 @@ export const GreetingSectionContainer = ({
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "start",
+        position: "fixed",
       }}
     >
       {children}
