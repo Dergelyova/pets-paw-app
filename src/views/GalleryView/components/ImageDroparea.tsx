@@ -1,6 +1,8 @@
 import { Box, InputLabel, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import UploadBgImage from "../../../assets/images/upload-bg.png";
+import UploadBgDarkImage from "../../../assets/images/upload-bg-transparent.png";
+import { ThemeModeContext } from "../../../components/context/ThemeModeProvider";
 
 type ImageDropareaProps = {
   selectedImage?: File;
@@ -13,6 +15,7 @@ export const ImageDroparea = ({
   handleSelect,
   isError,
 }: ImageDropareaProps) => {
+  const { isDarkMode } = useContext(ThemeModeContext);
   const handleCapture = ({ target }: any) => {
     if (target.files[0]) handleSelect(target.files[0]);
   };
@@ -48,7 +51,7 @@ export const ImageDroparea = ({
           id="dragzone"
           draggable="true"
           sx={{
-            backgroundColor: isError ? "secondary.main" : "background.paper",
+            backgroundColor: isError ? "secondary.main" : "secondary.light",
             width: "100%",
             height: "320px",
             borderRadius: "20px",
@@ -59,7 +62,9 @@ export const ImageDroparea = ({
             flexDirection: "column",
             backgroundImage: isError
               ? `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='20' ry='20' stroke='%23FF868EFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e")`
-              : `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='20' ry='20' stroke='%23FBE0DCFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e"), url(${UploadBgImage})`,
+              : `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='20' ry='20' stroke='%23FBE0DCFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e"), url(${
+                  isDarkMode ? UploadBgDarkImage : UploadBgImage
+                })`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
           }}

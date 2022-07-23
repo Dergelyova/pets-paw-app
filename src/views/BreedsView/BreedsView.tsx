@@ -109,8 +109,16 @@ const BreedsView = () => {
             options={limitOptions.map((opt) => `Limit:${opt}`)}
             handleChange={handleLimitChange}
           />
-          <SortButton handleClick={handleDescSortClick} sortOrder="desc" />
-          <SortButton handleClick={handleAscSortClick} sortOrder="asc" />
+          <SortButton
+            handleClick={handleDescSortClick}
+            isActive={order === OrderOptions.DESC}
+            sortOrder="desc"
+          />
+          <SortButton
+            handleClick={handleAscSortClick}
+            isActive={order === OrderOptions.ASC}
+            sortOrder="asc"
+          />
         </Box>
       </Box>
       {loading && <CircularProgress />}

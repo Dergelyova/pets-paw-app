@@ -83,7 +83,7 @@ export const SelectedBreedView = () => {
             variant="dots"
             sx={{
               zIndex: "1000",
-              backgroundColor: "white",
+              backgroundColor: "background.paper",
               margin: "-15px",
               padding: "10px",
               borderRadius: "20px",
@@ -108,7 +108,8 @@ export const SelectedBreedView = () => {
         <Box
           component="fieldset"
           sx={{
-            border: "2px solid #FBE0DC",
+            border: `2px solid`,
+            borderColor: "secondary.main",
             borderRadius: "10px",
             display: "flex",
             flexDirection: "column",

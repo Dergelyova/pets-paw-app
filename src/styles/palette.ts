@@ -59,7 +59,9 @@ export const DARK_PALETTE: PaletteOptions = {
     secondary: "#8C8C8C",
   },
   background: {
-    paper: "rgba(255, 255, 255, 0.05)",
+    paper: "#292929",
     default: "#1D1D1D",
   },
 };
+
+// rgba(255, 255, 255, 0.05)

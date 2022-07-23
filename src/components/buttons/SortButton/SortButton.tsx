@@ -6,11 +6,16 @@ import { GreyIconButton } from "./SortButton.styles";
 type SortButtonProps = {
   sortOrder: "asc" | "desc";
   handleClick: () => void;
+  isActive: boolean;
 };
 
-export const SortButton = ({ sortOrder, handleClick }: SortButtonProps) => {
+export const SortButton = ({
+  sortOrder,
+  handleClick,
+  isActive,
+}: SortButtonProps) => {
   return (
-    <GreyIconButton onClick={handleClick}>
+    <GreyIconButton isActive={isActive} onClick={handleClick}>
       {sortOrder === "desc" ? <SortIcon /> : <SortRevertIcon />}
     </GreyIconButton>
   );

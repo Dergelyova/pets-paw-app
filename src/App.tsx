@@ -1,6 +1,6 @@
 import React from "react";
-import { ThemeProvider, CssBaseline } from "@mui/material";
-// import { LIGHT_THEME, DARK_THEME } from "./styles";
+import { CssBaseline } from "@mui/material";
+
 import { BrowserRouter } from "react-router-dom";
 import { RenderRoutes } from "./navigation/routes";
 import { ROUTER_CONFIG } from "./navigation/router-config";
