@@ -10,6 +10,7 @@ import {
 } from "../../services/utils";
 import { UserActionLog, UserActionLogType } from "../VotingView/UserActionLog";
 import { CircularProgress } from "../../components/CircularProgress/CircularProgress";
+import { DefaultLog } from "../../components/DefaultLog/DefaultLog";
 
 const FavouritesView = () => {
   const [favImages, setFavImages] = useState<IDogImage[]>([]);
@@ -75,6 +76,9 @@ const FavouritesView = () => {
           images={favImages}
           handleImageAction={handleFavClick}
         />
+      )}
+      {favImages.length === 0 && !loading && (
+        <DefaultLog customText="No favourite items found" />
       )}
       <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
         {actionLogs.map((log) => (

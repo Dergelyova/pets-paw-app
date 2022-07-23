@@ -7,6 +7,7 @@ import { IDogImage } from "../../services/types";
 import { fetchBreedSearchWithImageByName } from "../../services/utils";
 import { ImagesGrid } from "../../layouts/PageSection/ImagedGrid/ImagesGrid";
 import { CircularProgress } from "../../components/CircularProgress/CircularProgress";
+import { DefaultLog } from "../../components/DefaultLog/DefaultLog";
 
 const SearchView = () => {
   const [searchParams] = useSearchParams();
@@ -42,7 +43,7 @@ const SearchView = () => {
           <CircularProgress />
         </Box>
       )}
-      {breeds && (
+      {breeds && breeds.length > 0 && (
         <>
           <Typography variant="body1" color="text.secondary">
             Search results for:{" "}
@@ -57,6 +58,7 @@ const SearchView = () => {
           />
         </>
       )}
+      {!loading && breeds?.length === 0 && <DefaultLog />}
     </Box>
   );
 };

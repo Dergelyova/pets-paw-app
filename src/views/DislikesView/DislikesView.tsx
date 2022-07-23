@@ -6,6 +6,7 @@ import { Breadcrumbs } from "../../components/Breadcrumbs/Breadcrumbs";
 import { IDogImage } from "../../services/types";
 import { fetchDislikedImages } from "../../services/utils";
 import { CircularProgress } from "../../components/CircularProgress/CircularProgress";
+import { DefaultLog } from "../../components/DefaultLog/DefaultLog";
 
 const DislikesView = () => {
   const [dislikedImages, setDislikedImages] = useState<IDogImage[]>([]);
@@ -38,6 +39,7 @@ const DislikesView = () => {
         </Box>
       )}
       {dislikedImages.length > 0 && <ImagesGrid images={dislikedImages} />}
+      {dislikedImages.length === 0 && !loading && <DefaultLog />}
     </Box>
   );
 };

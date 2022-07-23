@@ -35,7 +35,13 @@ export const ImagesGrid = ({
   actionOpion,
 }: ImagesListProps) => {
   return (
-    <ImageList variant="quilted" cols={3} rowHeight={140} gap={10}>
+    <ImageList
+      variant="quilted"
+      cols={3}
+      rowHeight={140}
+      gap={10}
+      sx={{ marginBlock: "0px" }}
+    >
       {images.map((image, i) => {
         let cols = 1,
           rows = 1;
