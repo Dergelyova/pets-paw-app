@@ -48,7 +48,6 @@ const VotingView = () => {
       removeImageFromFavourite(image?.favourite.id).then((res) => {
         let cleanedImage = { ...image };
         delete cleanedImage.favourite;
-        console.log(cleanedImage);
         setImage(cleanedImage);
         let d = new Date();
         setActionLogs([

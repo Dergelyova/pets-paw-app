@@ -40,9 +40,8 @@ export const UploadPhotoModal = ({ handleClose, open }: UploadModalProps) => {
         })
         .catch((error) => {
           const { message } = error.response.data;
-          console.log(message);
+
           if (message === "Classifcation failed: correct animal not found.") {
-            console.log("here");
             setError(true);
             setLoading(false);
           }

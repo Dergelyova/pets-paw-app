@@ -61,11 +61,9 @@ const GalleryView = () => {
   };
 
   const handleUploadModalOpen = () => {
-    console.log("open modal");
     setOpenModal(true);
   };
   const handleUploadModalClose = () => {
-    console.log("close modal");
     setOpenModal(false);
   };
 
