@@ -1,4 +1,4 @@
-import { Paper, FormControl, styled, OutlinedInput } from "@mui/material";
+import { styled, OutlinedInput } from "@mui/material";
 
 export const SearchInputContainer = styled(OutlinedInput)(({ theme }) => ({
   display: "flex",

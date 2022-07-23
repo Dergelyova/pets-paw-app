@@ -10,16 +10,26 @@ import {
   DislikeIconButton,
 } from "./ActionButtonsPanel.styles";
 
-export const ActionButtonsPanel = () => {
+type ActionButtonsPanelProps = {
+  isFavourite: boolean;
+  onFavClick: (vote: 1 | 0) => void;
+  onLikeClick: (vote: 1 | 0) => void;
+};
+
+export const ActionButtonsPanel = ({
+  isFavourite,
+  onFavClick,
+  onLikeClick,
+}: ActionButtonsPanelProps) => {
   return (
     <ActionButtonsPanelContainer>
-      <LikeIconButton>
+      <LikeIconButton onClick={() => onLikeClick(1)}>
         <LikeIcon />
       </LikeIconButton>
-      <FavIconButton>
-        <FavIconOutlined />
+      <FavIconButton onClick={() => onFavClick(isFavourite ? 0 : 1)}>
+        {isFavourite ? <FavIconFilled /> : <FavIconOutlined />}
       </FavIconButton>
-      <DislikeIconButton>
+      <DislikeIconButton onClick={() => onLikeClick(0)}>
         <DislikeIcon />
       </DislikeIconButton>
     </ActionButtonsPanelContainer>

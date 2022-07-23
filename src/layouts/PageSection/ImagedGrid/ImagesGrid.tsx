@@ -1,11 +1,9 @@
-import {
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-  Button,
-} from "@mui/material";
+import { ImageList, ImageListItem, Button } from "@mui/material";
 import React from "react";
-import { FavIconButtonOutlined } from "../../../components/buttons/IconActionButtons/FavIconButtonOutlined";
+import { LightIconButton } from "../../../components/buttons/IconActionButtons/ActionIconButtons.styles";
+import { ReactComponent as FavOutlinedIcon } from "../../../assets/svg/fav-20.svg";
+import { ReactComponent as FavFilledIcon } from "../../../assets/svg/fav-color-20.svg";
+
 import { IDogImage } from "../../../services/types";
 import {
   ImageListItemBarCenterIconButton,
@@ -14,8 +12,12 @@ import {
 
 type ImagesListProps = {
   images: IDogImage[];
-  handleImageAction: (clickedId: string | number) => void;
-  actionOpion: "breedSelect" | "favImage";
+  handleImageAction?: (
+    clickedId: string | number,
+    vote?: 1 | 0,
+    favId?: number | string
+  ) => void;
+  actionOpion?: "breedSelect" | "favImage";
 };
 
 function srcset(image: string, size: number, rows: number, cols: number) {
@@ -34,7 +36,7 @@ export const ImagesGrid = ({
 }: ImagesListProps) => {
   return (
     <ImageList variant="quilted" cols={3} rowHeight={140} gap={10}>
-      {images.map(({ id, url, name }, i) => {
+      {images.map((image, i) => {
         let cols = 1,
           rows = 1;
         if (i % 10 === 0 || i % 10 === 7) {
@@ -47,7 +49,7 @@ export const ImagesGrid = ({
 
         return (
           <ImageListItem
-            key={id}
+            key={image.id}
             cols={cols}
             rows={rows}
             sx={{
@@ -62,29 +64,45 @@ export const ImagesGrid = ({
             }}
           >
             <img
-              {...srcset(url, 140, rows, cols)}
+              {...srcset(image.url, 140, rows, cols)}
               alt="dogphoto from list"
               style={{ borderRadius: "20px" }}
             />
-            {actionOpion === "favImage" ? (
+            {actionOpion === "favImage" && (
               <ImageListItemBarCenterIconButton
                 actionIcon={
-                  <FavIconButtonOutlined
-                    handleClick={handleImageAction}
-                    id={id}
-                  />
+                  handleImageAction && (
+                    <LightIconButton
+                      onClick={() =>
+                        handleImageAction(
+                          image.id,
+                          image.favourite ? 0 : 1,
+                          image.favourite?.id
+                        )
+                      }
+                    >
+                      {image.favourite ? (
+                        <FavFilledIcon />
+                      ) : (
+                        <FavOutlinedIcon />
+                      )}
+                    </LightIconButton>
+                  )
                 }
               />
-            ) : (
+            )}{" "}
+            {actionOpion === "breedSelect" && (
               <ImageListItemBarBottomButton
                 actionIcon={
-                  <Button
-                    variant="text"
-                    fullWidth
-                    onClick={() => handleImageAction(id)}
-                  >
-                    {name}
-                  </Button>
+                  handleImageAction && (
+                    <Button
+                      variant="text"
+                      fullWidth
+                      onClick={() => handleImageAction(image.id)}
+                    >
+                      {image.name}
+                    </Button>
+                  )
                 }
               />
             )}

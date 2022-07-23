@@ -5,7 +5,10 @@ import {
   IGetImagesRequestParams,
   IBreedWithImage,
   IGetBreedsListWithImageParams,
-  IBreedWithImageReference,
+  IImageActionPostResponse,
+  IImageActionDeleteResponse,
+  IFavouritesImage,
+  IVote,
 } from "./types";
 import { BASE_URL, X_API_KEY, SUB_ID } from "../constants";
 
@@ -16,7 +19,13 @@ const instance = axios.create({
 
 export const getGalleryImages = async (params: IGetImagesRequestParams) => {
   return instance.get<IDogImage[]>("/images/search", {
-    params: { size: "small", ...params },
+    params: { size: "small", sub_id: SUB_ID, ...params },
+  });
+};
+
+export const getRandomImage = async () => {
+  return instance.get<IDogImage[]>("/images/search", {
+    params: { sub_id: SUB_ID },
   });
 };
 
@@ -35,7 +44,13 @@ export const getBreedsListWithImage = async (
 };
 
 export const getBreedInfoById = async (id: number) => {
-  return instance.get<IBreedWithImageReference>(`/breeds/${id}`);
+  return instance.get<IBreed>(`/breeds/${id}`);
+};
+
+export const getBreedInfoByName = async (name: string) => {
+  return instance.get<IBreed[]>("/breeds/search", {
+    params: { q: name },
+  });
 };
 
 export const postUploadedImage = async (file: File) => {
@@ -48,10 +63,38 @@ export const postUploadedImage = async (file: File) => {
   });
 };
 
-export const postAddImageToFav = async (image_id: string) => {
-  instance.post("/favourites", { sub_id: SUB_ID, image_id });
+export const postAddImageToFav = async (image_id: string | number) => {
+  return instance.post<IImageActionPostResponse>("/favourites", {
+    image_id,
+    sub_id: SUB_ID,
+  });
 };
 
-export const deleteImageFromFav = async (favourite_id: string) => {
-  instance.post("/favourites", { params: { favourite_id } });
+export const deleteImageFromFav = async (favourite_id: string | number) => {
+  return instance.delete<IImageActionDeleteResponse>(
+    `/favourites/${favourite_id}`
+  );
+};
+
+export const getFavouriteImages = async () => {
+  return instance.get<IFavouritesImage[]>("/favourites", {
+    params: { sub_id: SUB_ID, limit: 20 },
+  });
+};
+
+export const getVotes = async () => {
+  return instance.get<IVote[]>("/votes", {
+    params: { sub_id: SUB_ID, limit: 20 },
+  });
+};
+
+export const postCreateVote = async (
+  image_id: string | number,
+  value: 1 | 0
+) => {
+  return instance.post<IImageActionPostResponse>("/votes", {
+    image_id,
+    sub_id: SUB_ID,
+    value,
+  });
 };

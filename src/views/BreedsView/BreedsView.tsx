@@ -5,6 +5,7 @@ import { Breadcrumbs } from "../../components/Breadcrumbs/Breadcrumbs";
 import { BackIconButton } from "../../components/buttons/IconActionButtons/BackIconButton";
 import { NavButton } from "../../components/buttons/NavButton/NavButton";
 import { SortButton } from "../../components/buttons/SortButton/SortButton";
+import { CircularProgress } from "../../components/CircularProgress/CircularProgress";
 import { BasicDropdown } from "../../components/forms/BasicDropdown/BasicDropdown";
 import { ImagesGrid } from "../../layouts/PageSection/ImagedGrid/ImagesGrid";
 import {
@@ -25,20 +26,17 @@ const BreedsView = () => {
       name: "All breeds",
     },
   ]);
-  const [selectedBreed, setSelectedBreed] = useState<number>(0);
+  const [selectedBreed] = useState<number>(0);
   const [breedsImages, setBreedsImages] = useState<IDogImage[] | undefined>(
     undefined
   );
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState<OrderOptionsShort>(OrderOptions.ASC);
+  const [loading, setLoading] = useState(true);
 
   const handleLimitChange = (val: string) => {
     setLimit(+val.split(":")[1]);
-  };
-
-  const handleBreedChange = (val: number) => {
-    setSelectedBreed(val);
   };
 
   const handleNextClick = () => {
@@ -76,9 +74,12 @@ const BreedsView = () => {
         ...mappedBreeds,
       ]);
     });
+
+    return () => setBreedsList([]);
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     fetchBreedsImages({
       limit,
       order,
@@ -88,17 +89,18 @@ const BreedsView = () => {
         return { id, name, url: image.url };
       });
       setBreedsImages(breedsImages);
+      setLoading(false);
     });
   }, [limit, page, order]);
 
   return (
-    <div>
+    <>
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1 }}>
         <BackIconButton />
         <Breadcrumbs />
         <BasicDropdown
           options={breedsList}
-          handleChange={handleBreedChange}
+          handleChange={handleBreedSelection}
           selected={selectedBreed}
         />
         <Box sx={{ display: "flex", gap: 1 }}>
@@ -111,26 +113,29 @@ const BreedsView = () => {
           <SortButton handleClick={handleAscSortClick} sortOrder="asc" />
         </Box>
       </Box>
-      {breedsImages && (
-        <ImagesGrid
-          actionOpion="breedSelect"
-          images={breedsImages}
-          handleImageAction={handleBreedSelection}
-        />
+      {loading && <CircularProgress />}
+      {breedsImages && !loading && (
+        <>
+          <ImagesGrid
+            actionOpion="breedSelect"
+            images={breedsImages}
+            handleImageAction={handleBreedSelection}
+          />
+          <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
+            <NavButton
+              disabled={page <= 0}
+              direction="prev"
+              handleClick={handlePrevClick}
+            />
+            <NavButton
+              disabled={page + 1 > Math.floor((breedsList.length - 1) / limit)}
+              direction="next"
+              handleClick={handleNextClick}
+            />
+          </Box>
+        </>
       )}
-      <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
-        <NavButton
-          disabled={page <= 0}
-          direction="prev"
-          handleClick={handlePrevClick}
-        />
-        <NavButton
-          disabled={page + 1 > Math.floor((breedsList.length - 1) / limit)}
-          direction="next"
-          handleClick={handleNextClick}
-        />
-      </Box>
-    </div>
+    </>
   );
 };
 

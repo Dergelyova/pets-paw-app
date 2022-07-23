@@ -1,35 +1,19 @@
 import React, { useState } from "react";
-import {
-  Paper,
-  InputBase,
-  FormControl,
-  InputAdornment,
-  OutlinedInput,
-  Input,
-} from "@mui/material";
+import { FormControl, InputAdornment } from "@mui/material";
 
 import { SearchIconButton } from "../../buttons/IconActionButtons/SearchIconButton";
 import { SearchInputContainer } from "./SearchInput.styles";
+import { useNavigate } from "react-router-dom";
 
 export const SearchInput = () => {
   const [value, setValue] = useState("");
+  const navigate = useNavigate();
 
-  //   const handleChange: (
-  //     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  //   ) => void = () => {};
+  const handleSearchClick = () => {
+    navigate({ pathname: "/search", search: `?q=${value}` }, { replace: true });
+  };
+
   return (
-    // <SearchInputContainer>
-    //   <InputBase
-    //     onFocus={(e) => (e.target.placeholder = "")}
-    //     value={value}
-    //     onChange={(e) => setValue(e.target.value)}
-    //     sx={{ ml: "20px", flex: 1 }}
-    //     placeholder="Search for breeds by name"
-    //     inputProps={{ "aria-label": "search google maps" }}
-    //   />
-    //   <SearchIconButton />
-    // </SearchInputContainer>
-
     <FormControl fullWidth>
       <SearchInputContainer
         value={value}
@@ -37,7 +21,7 @@ export const SearchInput = () => {
         placeholder="Search for breeds by name"
         endAdornment={
           <InputAdornment position="end">
-            <SearchIconButton />
+            <SearchIconButton handleClick={handleSearchClick} />
           </InputAdornment>
         }
         fullWidth={true}

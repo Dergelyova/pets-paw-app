@@ -9,9 +9,15 @@ import { Breadcrumbs } from "../../components/Breadcrumbs/Breadcrumbs";
 import { Box, Paper } from "@mui/material";
 import { BasicDropdown } from "../../components/forms/BasicDropdown/BasicDropdown";
 import { ReloadButton } from "../../components/buttons/IconActionButtons/ReloadButton";
-import { fetchGalleryImages, fetchBreedsListInfo } from "../../services/utils";
+import {
+  fetchGalleryImages,
+  fetchBreedsListInfo,
+  addImageToFavourite,
+  removeImageFromFavourite,
+} from "../../services/utils";
 import { UploadButton } from "../../components/buttons/UploadButton/UploadButton";
 import { UploadPhotoModal } from "./components/UploadPhotoModal";
+import { CircularProgress } from "../../components/CircularProgress/CircularProgress";
 
 function getKeyName(value: string) {
   return Object.entries(ImageType).find(([key, val]) => val === value)?.[0];
@@ -33,6 +39,7 @@ const GalleryView = () => {
   ]);
   const [selectedBreed, setSelectedBreed] = useState<number>(0);
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleOrderChange = (val: OrderOptions) => {
     setPage(0);
@@ -62,6 +69,36 @@ const GalleryView = () => {
     setOpenModal(false);
   };
 
+  const handleFavClick = (
+    imageId: string | number,
+    favAction?: 1 | 0,
+    favId?: number | string
+  ) => {
+    if (favAction === undefined) return;
+    if (!!favAction) {
+      addImageToFavourite(imageId).then(({ id }) => {
+        let updatedImages = images?.map((image) => {
+          if (image.id === imageId) return { ...image, favourite: { id } };
+          return image;
+        });
+        setImages(updatedImages);
+      });
+    }
+    if (favId) {
+      removeImageFromFavourite(favId).then((res) => {
+        let updatedImages = images?.map((image) => {
+          if (image.id === imageId) {
+            let cleanedImage = { ...image };
+            delete cleanedImage.favourite;
+            return cleanedImage;
+          }
+          return image;
+        });
+        setImages(updatedImages);
+      });
+    }
+  };
+
   useEffect(() => {
     fetchBreedsListInfo().then((res) => {
       const mappedBreeds: IBreed[] = res.map((breed) => ({
@@ -77,16 +114,27 @@ const GalleryView = () => {
         ...mappedBreeds,
       ]);
     });
+    return () =>
+      setBreeds([
+        {
+          id: 0,
+          name: "All",
+        },
+      ]);
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     fetchGalleryImages({
       limit,
       order,
       mime_types: type,
       page,
       breed_id: selectedBreed !== 0 ? selectedBreed : undefined,
-    }).then((res) => setImages(res));
+    }).then((res) => {
+      setImages(res);
+      setLoading(false);
+    });
   }, [limit, order, type, page, selectedBreed]);
 
   return (
@@ -136,11 +184,12 @@ const GalleryView = () => {
           <ReloadButton handleClick={() => setPage(page + 1)} />
         </Box>
       </Paper>
-      {images && (
+      {loading && <CircularProgress />}
+      {images && !loading && (
         <ImagesGrid
           actionOpion="favImage"
           images={images}
-          handleImageAction={(id) => alert(`I want to add photo to fav ${id}`)}
+          handleImageAction={handleFavClick}
         />
       )}
       <UploadPhotoModal handleClose={handleUploadModalClose} open={openModal} />
