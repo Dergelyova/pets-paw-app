@@ -9,7 +9,7 @@ function App() {
   return (
     <ThemeProvider theme={MAIN_THEME}>
       <CssBaseline />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <RenderRoutes routes={ROUTER_CONFIG} />
       </BrowserRouter>
     </ThemeProvider>
