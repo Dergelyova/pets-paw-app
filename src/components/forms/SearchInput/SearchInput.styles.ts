@@ -8,8 +8,8 @@ export const SearchInputContainer = styled(OutlinedInput)(({ theme }) => ({
   padding: "10px",
   borderRadius: "20px",
   outline: "none",
-  backgroundColor: theme.palette.common.white,
-  border: `2px solid ${theme.palette.common.white}`,
+  backgroundColor: theme.palette.background.paper,
+  border: `2px solid ${theme.palette.background.paper}`,
   "& .MuiOutlinedInput-input": {
     paddingBlock: "5px",
     paddingInline: "10px",

@@ -5,7 +5,6 @@ export const StyledDialog = styled(Dialog)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     alignContent: "center",
-
     height: "100%",
     maxWidth: "680px",
     width: "100%",

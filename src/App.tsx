@@ -1,19 +1,22 @@
 import React from "react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import { MAIN_THEME } from "./styles";
+// import { LIGHT_THEME, DARK_THEME } from "./styles";
 import { BrowserRouter } from "react-router-dom";
 import { RenderRoutes } from "./navigation/routes";
 import { ROUTER_CONFIG } from "./navigation/router-config";
+import { ThemeModeProvider } from "./components/context/ThemeModeProvider";
 
 function App() {
   return (
-    <ThemeProvider theme={MAIN_THEME}>
+    <ThemeModeProvider>
       <CssBaseline />
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <RenderRoutes routes={ROUTER_CONFIG} />
       </BrowserRouter>
-    </ThemeProvider>
+    </ThemeModeProvider>
   );
 }
 
 export default App;
+
+// basename={process.env.PUBLIC_URL}

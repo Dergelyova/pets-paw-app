@@ -104,6 +104,10 @@ export const ImagesGrid = ({
                     <Button
                       variant="text"
                       fullWidth
+                      sx={{
+                        backgroundColor: "secondary.light",
+                        "&:hover": { backgroundColor: "secondary.light" },
+                      }}
                       onClick={() => handleImageAction(image.id)}
                     >
                       {image.name}
