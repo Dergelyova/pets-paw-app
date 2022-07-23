@@ -10,7 +10,7 @@ function App() {
   return (
     <ThemeModeProvider>
       <CssBaseline />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <RenderRoutes routes={ROUTER_CONFIG} />
       </BrowserRouter>
     </ThemeModeProvider>
@@ -18,5 +18,3 @@ function App() {
 }
 
 export default App;
-
-// basename={process.env.PUBLIC_URL}
