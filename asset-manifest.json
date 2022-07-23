@@ -1,11 +1,14 @@
 {
   "files": {
-    "main.js": "/pets-paw-app/static/js/main.56336356.js",
+    "main.js": "/pets-paw-app/static/js/main.7bf6e912.js",
     "static/media/girl-and-pet.png": "/pets-paw-app/static/media/girl-and-pet.3be46454737d68f924fa.png",
     "static/media/images-search.png": "/pets-paw-app/static/media/images-search.04776673f380c05af816.png",
     "static/media/vote-table.png": "/pets-paw-app/static/media/vote-table.028ac6c391b95fcf60ab.png",
     "static/media/pet-breeds.png": "/pets-paw-app/static/media/pet-breeds.63d5c641f34b65351e85.png",
     "static/media/logo.svg": "/pets-paw-app/static/media/logo.71b3e75eb52e2245743f891953479d6d.svg",
+    "static/media/logo-white.svg": "/pets-paw-app/static/media/logo-white.37123b63df474109e966f6fb31859e80.svg",
+    "static/media/open-eye.svg": "/pets-paw-app/static/media/open-eye.14414351a70a696e416e773308b56319.svg",
+    "static/media/close-eye.svg": "/pets-paw-app/static/media/close-eye.d4f95ddfefe78b71928b36e79d7cd58b.svg",
     "static/media/sort-20.svg": "/pets-paw-app/static/media/sort-20.db485a20099b96d82c68f38035903a77.svg",
     "static/media/sort-revert-20.svg": "/pets-paw-app/static/media/sort-revert-20.0e988999bb21bf46767e345c2d1193b7.svg",
     "static/media/fav-20.svg": "/pets-paw-app/static/media/fav-20.f30ae98c031a9e7f33c8afe31b68c6f6.svg",
@@ -28,9 +31,9 @@
     "static/media/fav-color-20.svg": "/pets-paw-app/static/media/fav-color-20.61c5ae583c4065d4bce10190c38ded94.svg",
     "static/media/close-20.svg": "/pets-paw-app/static/media/close-20.f99f05a9a9b013fd057137ac62c9bdd9.svg",
     "static/media/upload-16.svg": "/pets-paw-app/static/media/upload-16.897ccd92c7846e3c1bff6d879888bacf.svg",
-    "main.56336356.js.map": "/pets-paw-app/static/js/main.56336356.js.map"
+    "main.7bf6e912.js.map": "/pets-paw-app/static/js/main.7bf6e912.js.map"
   },
   "entrypoints": [
-    "static/js/main.56336356.js"
+    "static/js/main.7bf6e912.js"
   ]
 }
