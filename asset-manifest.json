@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/pets-paw-app/static/js/main.e7f07f07.js",
+    "main.js": "/pets-paw-app/static/js/main.56336356.js",
     "static/media/girl-and-pet.png": "/pets-paw-app/static/media/girl-and-pet.3be46454737d68f924fa.png",
     "static/media/images-search.png": "/pets-paw-app/static/media/images-search.04776673f380c05af816.png",
     "static/media/vote-table.png": "/pets-paw-app/static/media/vote-table.028ac6c391b95fcf60ab.png",
@@ -28,9 +28,9 @@
     "static/media/fav-color-20.svg": "/pets-paw-app/static/media/fav-color-20.61c5ae583c4065d4bce10190c38ded94.svg",
     "static/media/close-20.svg": "/pets-paw-app/static/media/close-20.f99f05a9a9b013fd057137ac62c9bdd9.svg",
     "static/media/upload-16.svg": "/pets-paw-app/static/media/upload-16.897ccd92c7846e3c1bff6d879888bacf.svg",
-    "main.e7f07f07.js.map": "/pets-paw-app/static/js/main.e7f07f07.js.map"
+    "main.56336356.js.map": "/pets-paw-app/static/js/main.56336356.js.map"
   },
   "entrypoints": [
-    "static/js/main.e7f07f07.js"
+    "static/js/main.56336356.js"
   ]
 }
